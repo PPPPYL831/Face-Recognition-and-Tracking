@@ -1,0 +1,68 @@
+
+body{
+    padding:1%;
+	background:#80afa3;
+    /* background: linear-gradient(#021317, #293841, #80afa3, #ded8c9); */
+	color: #293841;
+	text-align: center;
+}
+h1 {
+	font: bold 40px Helvetica;
+}
+
+h3 {
+	font: bold 30px Helvetica;
+}
+
+h4 {
+	font: bold 30px Helvetica;
+}
+
+div {
+	font: bold 30px Helvetica;
+}
+
+p {
+	font: bold 25px Helvetica;
+}
+
+.button {
+	font: bold 25px Helvetica;
+	text-decoration: none;
+	background-color: #EEEEEE;
+	color: #293841;
+	padding: 6px 6px 6px 6px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	border-radius: 15px;
+}
+
+h4 button{
+	font: bold 25px Helvetica;
+	text-decoration: none;
+	background-color: #EEEEEE;
+	color: #293841;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	border-radius: 10px;
+
+}
+
+div button{
+	font: bold 25px Helvetica;
+	text-decoration: none;
+	background-color: #EEEEEE;
+	color: #293841;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	border-radius: 10px;
+}
+img{
+	display: display inline-block
+}
