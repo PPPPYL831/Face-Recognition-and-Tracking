@@ -1,0 +1,70 @@
+<html>
+
+<head>
+  <title>5725 Project</title>
+  <link rel="stylesheet" href='../static/style.css' />
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Pan Tilt System</h1>
+  <h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+  <hr>
+  <h4> PAN Angle:
+    <button onclick="btn('PAN', '-')">-</button>
+    <span id="panNow">[ {{ panServoAngle }} ]</span>
+    <button onclick="btn('PAN', '+')">+</button>
+  </h4>
+  <h4> TILT Angle:
+    <button onclick="btn('TILT', '-')">-</button>
+    <span id="tiltNow">[ {{ tiltServoAngle }} ]</span>
+    <button onclick="btn('TILT', '+')">+</button>
+  </h4>
+  <hr>
+  <h3><a href="/" class="button">RETURN</a></h3>
+  <p> @2021 Developed by sd925 & yp387 </p> 
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+  integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script language="javascript">
+  var socket = io();
+  socket.on("connect", function () {
+    console.log("connected to flask-socketio.");
+  });
+
+  function btn(sv, si) {
+    var sengAngle = 0
+    if (sv == 'PAN') {
+      str = document.getElementById("panNow").innerHTML
+      str = str.substring(2, str.length-2)
+      panAngle = parseInt(str)
+      if (si == '+') {
+        panAngle += 10
+      } else {
+        panAngle -= 10
+      }
+      document.getElementById("panNow").innerHTML = '[ ' + panAngle + ' ]';
+      sengAngle = panAngle
+    } else {
+      str = document.getElementById("tiltNow").innerHTML
+      str = str.substring(2, str.length-2)
+      tiltAngle = parseInt(str)
+      if (si == '+') {
+        tiltAngle += 10
+      } else {
+        tiltAngle -= 10
+      }
+      document.getElementById("tiltNow").innerHTML = '[ ' + tiltAngle + ' ]';
+      sengAngle = tiltAngle
+    }
+    socket.emit("socket_set", { servo: sv, angle: sengAngle })
+    // console.log(sv, si)
+  }
+</script>
+
+</html>

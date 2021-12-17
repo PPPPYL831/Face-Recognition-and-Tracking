@@ -1,0 +1,59 @@
+<html>
+
+<head>
+  <title>5725 Project</title>
+  <link rel="stylesheet" href='../static/style.css' />
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Pan Tilt System</h1>
+  <h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+  <p> Enter Pan Tilt Servo Angle:
+    <!-- <form method="POST">
+    PAN: <input type="text" name="panServoAngle" value={{panServoAngle}} size="3">
+    TILT: <input type="text" name="tiltServoAngle" value={{tiltServoAngle}} size="3">
+    <input type="submit" value="submit">
+  </form> -->
+  <div>
+    PAN: <input id="PAN" type="text" value={{panServoAngle}}>
+    TILT: <input id="TILT" type="text" value={{tiltServoAngle}}>
+    <button onclick=btn()>submit</button>
+  </div>
+
+  </p>
+  <hr>
+  <h3><a href="/" class="button">RETURN</a></h3>
+  <p> @2021 Developed by sd925 & yp387 </p>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+  integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script language="javascript">
+  var socket = io();
+  socket.on("connect", function () {
+    console.log("connected to flask-socketio.");
+  });
+
+  function btn() {
+    // console.log(document.getElementById("PAN").value, document.getElementById("TILT").value)
+    panAngle = parseInt(document.getElementById("PAN").value)
+    tiltAngle = parseInt(document.getElementById("TILT").value)
+    var re = /^[0-9]+.?[0-9]*/;
+    if (!re.test(panAngle) || !re.test(tiltAngle)) {
+      alert('Input valid needed');
+    } else {
+      console.log(panAngle, tiltAngle)
+      socket.emit("socket_set", { servo: 'PAN', angle: panAngle })
+      socket.emit("socket_set", { servo: 'TILT', angle: tiltAngle })
+    }
+
+    // console.log(sv, si)
+  }
+</script>
+
+</html>

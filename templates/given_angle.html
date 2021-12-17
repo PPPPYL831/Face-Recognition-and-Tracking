@@ -1,0 +1,71 @@
+<html>
+
+<head>
+	<title>5725 Project</title>
+	<link rel="stylesheet" href='../static/style.css' />
+	<style>
+		body {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Pan Tilt System</h1>
+	<h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+	<hr>
+	<h4> PAN:
+		<button onclick="btn('PAN', 30)">30</button>
+		<button onclick="btn('PAN', 45)">45</button>
+		<button onclick="btn('PAN', 60)">60</button>
+		<button onclick="btn('PAN', 75)">75</button>
+		<button onclick="btn('PAN', 90)">90</button>
+		<button onclick="btn('PAN', 105)">105</button>
+		<button onclick="btn('PAN', 120)">120</button>
+		<button onclick="btn('PAN', 135)">135</button>
+		<button onclick="btn('PAN', 150)">150</button>
+		<span> ==> Angle: </span><span id="PAN"> {{ panServoAngle }} </span>
+	</h4>
+	<h4> TILT:
+		<button onclick="btn('TILT', 30)">30</button>
+		<button onclick="btn('TILT', 45)">45</button>
+		<button onclick="btn('TILT', 60)">60</button>
+		<button onclick="btn('TILT', 75)">75</button>
+		<button onclick="btn('TILT', 90)">90</button>
+		<button onclick="btn('TILT', 105)">105</button>
+		<button onclick="btn('TILT', 120)">120</button>
+		<button onclick="btn('TILT', 135)">135</button>
+		<button onclick="btn('TILT', 150)">150</button>
+
+		<span> ==> Angle: </span><span id="TILT"> {{ tiltServoAngle }} </span>
+	</h4>
+	<hr>
+	<h3><a href="/" class="button">RETURN</a></h3>
+	<p> @2021 Developed by sd925 & yp387 </p> 
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+	integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script language="javascript">
+	var socket = io();
+	socket.on("connect", function () {
+		console.log("connected to flask-socketio.");
+	});
+
+	var panAngle = 90
+	var tiltAngle = 90
+
+	function btn(s, a) {
+		socket.emit("socket_set", { servo: s, angle: a })
+		if (s == 'PAN') {
+			panAngle = a
+			document.getElementById(s).textContent = panAngle;
+		} else {
+			tiltAngle = a
+			document.getElementById(s).textContent = tiltAngle;
+		}
+		console.log(s, panAngle)
+	}
+</script>
+
+</html>
